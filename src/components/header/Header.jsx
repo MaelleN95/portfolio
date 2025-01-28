@@ -4,12 +4,11 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useScreenSize from '../../lib/customHooks';
 
 import { Anchor, ConfigProvider } from 'antd';
-import { FaRegArrowAltCircleLeft, FaPenAlt } from 'react-icons/fa';
+import { FaRegArrowAltCircleLeft } from 'react-icons/fa';
 
-import ConnexionModal from '../../components/connexion-modal/ConnexionModal';
 import datas from '../../assets/datas.json';
 
-function Header({ user, setUser }) {
+function Header() {
   const URL = useLocation();
 
   let nav = useNavigate();
@@ -120,9 +119,6 @@ function Header({ user, setUser }) {
                           Contact
                         </a>
                       </li>
-                      <li>
-                        <ConnexionModal user={user} setUser={setUser} />
-                      </li>
                     </ul>
                   </div>
                 </>
@@ -156,18 +152,6 @@ function Header({ user, setUser }) {
           )}
         </ConfigProvider>
       </nav>
-
-      <div className="options">
-        {user ? (
-          <Link
-            to="/admin/MN95/projects"
-            title={`Lien vers la page de modification des projets`}
-          >
-            <FaPenAlt className="pen" />
-          </Link>
-        ) : null}
-        {mobilHeader ? null : <ConnexionModal user={user} setUser={setUser} />}
-      </div>
     </header>
   );
 }

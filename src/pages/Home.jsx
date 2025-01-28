@@ -10,6 +10,7 @@ import SoftSkills from '../sections/soft-skills/SoftSkills';
 import Tools from '../sections/tools/Tools';
 
 function Home() {
+  console.log('Home');
   return (
     <main>
       <Banner />
