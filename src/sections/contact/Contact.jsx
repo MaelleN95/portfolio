@@ -47,6 +47,11 @@ const Contact = () => {
 
     for (const pattern of dangerousPatterns) {
       if (pattern.test(message)) {
+        setNotification({
+          type: 'error',
+          message:
+            "Bah alors ? Qu'est-ce que tu fais ? Tu veux hack ? ET BIEN C'EST RATÉ ! MOUAHAHAHAH",
+        });
         return false;
       }
     }
@@ -55,6 +60,8 @@ const Contact = () => {
 
   const sendEmail = (e) => {
     e.preventDefault();
+
+    setNotification({ type: '', message: '' });
 
     let successSend = true;
 
