@@ -3,7 +3,6 @@ import ProjectCard from '../../components/project-card/ProjectCard';
 
 function MyProjects() {
   const projects = datas.projects;
-  console.log(projects);
   return (
     <section id="my-projects">
       <h2>Mes projets</h2>

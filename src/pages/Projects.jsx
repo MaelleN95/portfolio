@@ -13,8 +13,8 @@ import percentages from '../assets/icons/illustrations/percentages.svg';
 function ProjectContentPage() {
   const { projectsId } = useParams();
 
-  const { project } = datas.projects.find(
-    (project) => project.id === parseInt(projectsId)
+  const project = datas.projects.find(
+    (project) => project.projectId === projectsId
   );
 
   return (
