@@ -108,7 +108,7 @@ const Contact = () => {
     } else {
       setNotification({
         type: 'error',
-        message: "Erreur lors de l'envoi du message.",
+        message: "Erreur lors de l'envoi du message. Veuillez réessayer.",
       });
     }
     showNotification();
@@ -143,29 +143,38 @@ const Contact = () => {
             />
           </div>
         </div>
+
         <div className="form-block">
           <form onSubmit={sendEmail}>
-            <input
-              type="text"
-              name="name"
-              placeholder="Nom"
-              ref={nameRef}
-              required
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              ref={emailRef}
-            />
-            <textarea
-              name="message"
-              type="textarea"
-              placeholder="Message"
-              ref={messageRef}
-              required
-            />
-            <button type="submit">Envoyer</button>
+            <div className="input-data ">
+              <input
+                type="text"
+                name="name"
+                placeholder="Nom"
+                ref={nameRef}
+                required
+              />
+            </div>
+            <div className=" input-data">
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                ref={emailRef}
+              />
+            </div>
+            <div className=" input-data textarea">
+              <textarea
+                name="message"
+                type="textarea"
+                placeholder="Message"
+                ref={messageRef}
+                required
+              />
+            </div>
+            <div className="button-submit">
+              <button type="submit">Envoyer</button>
+            </div>
           </form>
         </div>
       </div>
