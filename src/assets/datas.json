@@ -310,7 +310,7 @@
         "Rédiger des commentaires clairs afin de faciliter la compréhension de la logique du jeu lors de la maintenance."
       ],
       "linkGitHub": "https://github.com/MaelleN95/olletho",
-      "linkDeployedSite": ""
+      "linkDeployedSite": "https://olletho.vercel.app/"
     }
   ]
 }
