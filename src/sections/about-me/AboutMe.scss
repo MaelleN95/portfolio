@@ -12,12 +12,12 @@
     z-index: -1;
     max-height: 507.9px;
     @media (max-width: 1400px) {
-      content: none;
+      display: none;
     }
   }
 
   & img {
-    height: 15rem;
+    height: 11rem;
     padding-left: 5rem;
     @media (max-width: 1175px) {
       padding-left: 0;

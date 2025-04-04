@@ -1,24 +1,8 @@
-import { useEffect, useState } from 'react';
-
-import { getProjects } from '../../lib/common';
-
+import datas from '../../assets/datas.json';
 import ProjectCard from '../../components/project-card/ProjectCard';
-import Loader from '../../components/loader/Loader';
 
 function MyProjects() {
-  const [projects, setProjects] = useState(null);
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    async function getProjectsList() {
-      const projects = await getProjects();
-      if (projects) {
-        setProjects(projects);
-        setLoading(false);
-      }
-    }
-    getProjectsList();
-  }, []);
-
+  const projects = datas.projects;
   return (
     <section id="my-projects">
       <h2>Mes projets</h2>
@@ -27,24 +11,20 @@ function MyProjects() {
         personnelles pour avoir un aperçu de mon travail !
       </p>
       <ul className="projects">
-        {loading ? (
-          <Loader size="20%" color="black" />
-        ) : (
-          projects.map((project, i) => {
-            return (
-              <ProjectCard
-                key={i}
-                deployedLink={project.linkDeployedSite}
-                githubLink={project.linkGitHub}
-                hardskills={project.hardSkills}
-                cover={project.cover}
-                projectId={project.projectId}
-              >
-                {project.title}
-              </ProjectCard>
-            );
-          })
-        )}
+        {projects.map((project, i) => {
+          return (
+            <ProjectCard
+              key={i}
+              deployedLink={project.linkDeployedSite}
+              githubLink={project.linkGitHub}
+              hardskills={project.hardSkills}
+              cover={project.cover}
+              projectId={project.projectId}
+            >
+              {project.title}
+            </ProjectCard>
+          );
+        })}
       </ul>
     </section>
   );

@@ -9,13 +9,13 @@
     content: '';
     position: absolute;
     right: 0;
-    height: 100%;
     width: 100%;
+    height: 618.4px;
     background-color: $bg-color-dark;
     z-index: -1;
     max-height: 886.2px;
     @media (max-width: $tablet) {
-      content: none;
+      display: none;
     }
   }
   & a {
@@ -33,9 +33,15 @@
     display: flex;
     justify-content: center;
     & img {
-      max-height: 359px;
-      @media (max-width: $tablet) {
+      max-height: 149px;
+      @media (max-width: $small-tablet) {
+        max-height: 23vw;
+      }
+      @media (max-width: $mobil) {
         max-height: 35vw;
+      }
+      @media (max-width: $small-mobil) {
+        max-height: 50vw;
       }
     }
   }
@@ -47,23 +53,13 @@
   border: $bg-color-light 5px solid;
   border-radius: 22px;
   padding: 35px;
-  @media (max-width: $tablet) {
+  @media (max-width: $small-tablet) {
     display: flex;
     flex-direction: column;
     border: 0;
   }
   @media (max-width: $mobil) {
     padding: 0;
-  }
-  &::before {
-    content: '';
-    position: absolute;
-    right: 0;
-    height: 100%;
-    width: 100%;
-    background-color: $bg-color-dark;
-    z-index: -1;
-    max-height: 663px;
   }
 
   & .form-block {
@@ -103,8 +99,11 @@
       border: 0;
       background-color: white;
       &:focus {
-        background-color: lighten($color: $blue-color, $amount: 25);
+        outline: 2px solid $bg-color-dark;
       }
+    }
+    & .textarea {
+      padding-bottom: 0;
     }
     & label {
       padding-left: 5px;
@@ -120,7 +119,7 @@
         border: 0;
         background-color: $blue-color;
         color: $bg-color-dark;
-        margin: 10px;
+        margin: 20px;
         text-align: center;
         font-weight: bold;
         box-shadow: inset -2px -2px 7px 1px black, inset 2px 2px 7px 1px white;
@@ -137,13 +136,4 @@
       }
     }
   }
-  & .error {
-    color: $red-color;
-    font-size: 0.8rem;
-    margin: 0;
-  }
-}
-.error-input {
-  box-shadow: inset 0 0 3px 1px rgba(255, 0, 0, 0.7),
-    0 0 3px 1px rgba(255, 0, 0, 0.7);
 }

@@ -1,192 +1,185 @@
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-// import { DevTool } from '@hookform/devtools';
-
-import { addContactResponse } from '../../lib/common';
+import { useRef, useState } from 'react';
+import emailjs from '@emailjs/browser';
 
 import Notification from '../../components/notification/Notification';
-import Loader from '../../components/loader/Loader';
 
-function Contact() {
-    const [showNotification, setShowNotification] = useState(false);
-    const [notification, setNotification] = useState({ type: '', message: '' });
-    const [isLoading, setIsLoading] = useState(false);
+const Contact = () => {
+  const [notification, setNotification] = useState({ type: '', message: '' });
+  // eslint-disable-next-line no-unused-vars
+  const [successSend, setSuccessSend] = useState(false);
+  const [timerNotification, setTimerNotification] = useState(false);
 
-    const form = useForm({ mode: 'onTouched' });
-    const { register, /*control,*/ handleSubmit, formState, reset } = form;
-    const { errors, isDirty, isValid } = formState;
+  const showNotification = () => {
+    setTimerNotification(true);
+    setTimeout(() => {
+      setTimerNotification(false);
+    }, 5000);
+  };
 
-    const onSubmit = async (data) => {
-        let notif = { type: '', message: '' };
-        setIsLoading(true);
-        const newContactForm = await addContactResponse(data);
-        if (!newContactForm.error) {
-            notif = {
-                type: 'success',
-                message: 'Formulaire envoyé avec succès !',
-            };
-            reset();
-        } else {
-            notif = {
-                type: 'error',
-                message: "Une erreur est survenue lors de l'envoi !",
-            };
-        }
-        setIsLoading(false);
-        setNotification(notif);
-        setShowNotification(true);
-        setTimeout(() => {
-            setShowNotification(false);
-        }, 5000);
+  const nameRef = useRef();
+  const emailRef = useRef();
+  const messageRef = useRef();
+
+  const verifyNameInput = (name) => {
+    const regex = /^[A-Za-zÀ-ÖØ-öø-ÿō -]+$/;
+    if (!regex.test(name)) {
+      setNotification({ type: 'error', message: "Le nom n'est pas valide." });
+      return false;
+    }
+    return true;
+  };
+
+  const verifyEmailInput = (email) => {
+    const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    if (!regex.test(email)) {
+      setNotification({ type: 'error', message: "L'email n'est pas valide." });
+      return false;
+    }
+    return true;
+  };
+
+  const verifyMessageInput = (message) => {
+    const dangerousPatterns = [
+      /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi,
+      /<img\b[^<]*(?:(?!<\/img>)<[^<]*)*<\/img>/gi,
+      /<iframe\b[^<]*(?:(?!<\/iframe>)<[^<]*)*<\/iframe>/gi,
+    ];
+
+    for (const pattern of dangerousPatterns) {
+      if (pattern.test(message)) {
+        setNotification({
+          type: 'error',
+          message:
+            "Bah alors ? Qu'est-ce que tu fais ? Tu veux hack ? ET BIEN C'EST RATÉ ! MOUAHAHAHAH",
+        });
+        return false;
+      }
+    }
+    return true;
+  };
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    setNotification({ type: '', message: '' });
+
+    let successSend = true;
+
+    const formData = {
+      name: nameRef.current.value,
+      email: emailRef.current.value,
+      message: messageRef.current.value,
     };
 
-    return (
-        <section id="contact">
-            {showNotification && (
-                <Notification type={notification.type}>
-                    {notification.message}
-                </Notification>
-            )}
-            <h2>Me contacter</h2>
-            <div className="contact-block">
-                <div>
-                    <p>
-                        Une envie de discuter à propos d&apos;un projet ou une
-                        demande ?
-                    </p>
-                    <p>
-                        N&apos;hésitez surtout pas à me contacter en remplissant
-                        le formulaire et je vous répondrai dans les plus brefs
-                        délais !
-                    </p>
-                    <p>
-                        Si vous préférez par mail, c’est par{' '}
-                        <a href="mailto:nioche.maelle@gmail.com">ici</a>.
-                    </p>
-                    <div className="img-form">
-                        <img
-                            src="/social_networking.svg"
-                            alt="Illustration de 2 personnes qui discutent via SMS"
-                        />
-                    </div>
-                </div>
+    if (
+      !verifyNameInput(formData.name) ||
+      !verifyEmailInput(formData.email) ||
+      !verifyMessageInput(formData.message)
+    ) {
+      showNotification();
+      return;
+    }
 
-                <div className="form-block">
-                    <form onSubmit={handleSubmit(onSubmit)} noValidate>
-                        <div className="name-firstname">
-                            <div className="input-data ">
-                                <label htmlFor="nom">Nom</label>
-                                <input
-                                    type="text"
-                                    id="nom"
-                                    {...register('nom', {
-                                        required: {
-                                            value: false,
-                                        },
-                                    })}
-                                    className={
-                                        errors.nom?.message
-                                            ? 'error-input'
-                                            : null
-                                    }
-                                    autoComplete="off"
-                                    autoCapitalize="none"
-                                    spellCheck="true"
-                                />
-                                <p className="error">{errors.nom?.message}</p>
-                            </div>
+    emailjs
+      .send(
+        'service_ax7cobd',
+        'portfolio',
+        {
+          name: formData.name,
+          message: formData.message,
+          user_email: formData.email,
+        },
+        'KKodTS7xvMcCsCohY'
+      )
+      .then(
+        () => {
+          setSuccessSend(true);
+        },
+        () => {
+          setSuccessSend(false);
+        }
+      );
 
-                            <div className=" input-data">
-                                <label htmlFor="prenom">Prénom</label>
-                                <input
-                                    type="text"
-                                    id="prenom"
-                                    {...register('prenom', {
-                                        required: {
-                                            value: true,
-                                            message:
-                                                'Le champ Prénom est requis',
-                                        },
-                                    })}
-                                    className={
-                                        errors.prenom?.message
-                                            ? 'error-input'
-                                            : null
-                                    }
-                                    autoComplete="off"
-                                    autoCapitalize="none"
-                                    spellCheck="true"
-                                />
-                                <p className="error">
-                                    {errors.prenom?.message}
-                                </p>
-                            </div>
-                        </div>
+    if (successSend) {
+      nameRef.current.value = '';
+      emailRef.current.value = '';
+      messageRef.current.value = '';
+      setNotification({ type: 'success', message: 'Message envoyé !' });
+    } else {
+      setNotification({
+        type: 'error',
+        message: "Erreur lors de l'envoi du message. Veuillez réessayer.",
+      });
+    }
+    showNotification();
+  };
 
-                        <div className="input-data">
-                            <label htmlFor="email">E-mail</label>
-                            <input
-                                type="email"
-                                id="email"
-                                {...register('email', {
-                                    required: {
-                                        value: true,
-                                        message: 'Le champ Email est requis',
-                                    },
-                                    pattern: {
-                                        value: /^[a-zA-Z0-9.&-_~]+@[a-zA-Z0-9]+(?:\.[a-zA-Z0-9_-]+)*$/,
-                                        message: "Format d'e-mail invalide",
-                                    },
-                                })}
-                                className={
-                                    errors.email?.message ? 'error-input' : null
-                                }
-                                autoComplete="off"
-                                autoCapitalize="none"
-                                spellCheck="true"
-                            />
-                            <p className="error">{errors.email?.message}</p>
-                        </div>
+  return (
+    <section id="contact">
+      {timerNotification && (
+        <Notification type={notification.type}>
+          {notification.message}
+        </Notification>
+      )}
 
-                        <div className="input-data">
-                            <label htmlFor="msg">Message</label>
-                            <textarea
-                                id="msg"
-                                cols="30"
-                                rows="7"
-                                {...register('msg', {
-                                    required: {
-                                        value: true,
-                                        message: 'Le champ Message est requis',
-                                    },
-                                })}
-                                className={
-                                    errors.msg?.message ? 'error-input' : null
-                                }
-                                autoComplete="off"
-                                autoCapitalize="sentences"
-                                spellCheck="true"
-                            ></textarea>
-                            <p className="error">{errors.msg?.message}</p>
-                        </div>
-                        <div className="button-submit">
-                            <button
-                                type="submit"
-                                disabled={!isDirty || !isValid}
-                            >
-                                {isLoading ? (
-                                    <Loader color="black" size={40} />
-                                ) : (
-                                    'Envoyer'
-                                )}
-                            </button>
-                        </div>
-                    </form>
-                    {/* <DevTool control={control} /> */}
-                </div>
+      <h2>Me contacter</h2>
+      <div className="contact-block">
+        <div>
+          <p>
+            Une envie de discuter à propos d&apos;un projet ou une demande ?
+          </p>
+          <p>
+            N&apos;hésitez surtout pas à me contacter en remplissant le
+            formulaire et je vous répondrai dans les plus brefs délais !
+          </p>
+          <p>
+            Si vous préférez par mail, c’est par{' '}
+            <a href="mailto:nioche.maelle@gmail.com">ici</a>.
+          </p>
+          <div className="img-form">
+            <img
+              src="/social_networking.svg"
+              alt="Illustration de 2 personnes qui discutent via SMS"
+            />
+          </div>
+        </div>
+
+        <div className="form-block">
+          <form onSubmit={sendEmail}>
+            <div className="input-data ">
+              <input
+                type="text"
+                name="name"
+                placeholder="Nom"
+                ref={nameRef}
+                required
+              />
             </div>
-        </section>
-    );
-}
+            <div className=" input-data">
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                ref={emailRef}
+              />
+            </div>
+            <div className=" input-data textarea">
+              <textarea
+                name="message"
+                type="textarea"
+                placeholder="Message"
+                ref={messageRef}
+                required
+              />
+            </div>
+            <div className="button-submit">
+              <button type="submit">Envoyer</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  );
+};
 
 export default Contact;
