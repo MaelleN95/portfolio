@@ -6,8 +6,8 @@ function Banner() {
         <div className='welcome-message card'>
           <p>Bienvenue cher visiteur !</p>
           <p>Je vous informe que vous vous trouvez actuellement sur mon ancien portfolio (2024).</p>
-          <p>Pour me contacter ou découvrir mon activité actuelle, rendez-vous sur le site de mon entreprise : <br />
-          <a href="https://koji-dev.fr/">koji-dev.fr</a></p>
+          <p>Pour me contacter ou découvrir mon activité actuelle, rendez-vous sur le site de mon entreprise :</p>
+          <div><a href="https://koji-dev.fr/">koji-dev.fr</a></div>
         </div>
         <div className="banner-content">
         <div className="image">
