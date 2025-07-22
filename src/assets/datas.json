@@ -257,48 +257,6 @@
       ],
       "linkGitHub": "https://github.com/MaelleN95/Mon-Vieux-Grimoire",
       "linkDeployedSite": ""
-    },
-    {
-      "title": "Calculatrice de pourboire",
-      "projectId": "Calculatrice-de-pourboire",
-      "description": "Développer une application web pour combiner calculatrice de pourboire et convertisseur de devises en intégrant une API externe pour des taux de change en temps réel.",
-      "hardSkills": ["Figma", "React", "Sass", "API REST"],
-      "cover": "https://bucketportefolio.s3.eu-west-3.amazonaws.com/1713366415490_calculatrice-de-pourboire.webp",
-      "mission": [
-        "En parcourant différents pays, j'ai observé les diverses pratiques en matière de pourboire. Étant habituée à ma devise (l'euro), je me suis souvent trouvée à jongler entre une calculatrice de pourcentage de pourboire et un convertisseur de devises lors de mes déplacements. \nMon objectif était donc de créer un outil pratique et complet qui combine ces deux fonctionnalités en une seule application web."
-      ],
-      "date": 2024,
-      "skills": [
-        "Créer une maquette de A à Z avec Figma",
-        "Rechercher et concevoir une maquette favorisant une utilisation simple, efficace et esthétique, dans le but d'optimiser l'expérience utilisateur",
-        "Développer l'ensemble d'une application React responsive",
-        "Communiquer avec une API REST externe",
-        "Gérer des formulaires avec React",
-        "Développer une fonctionnalité de thème clair/sombre pour offrir une expérience personnalisée et adaptable aux préférences de l'utilisateur"
-      ],
-      "linkGitHub": "https://github.com/MaelleN95/Tip-calculator",
-      "linkDeployedSite": "https://calculatrice-de-pourboire.vercel.app/"
-    },
-    {
-      "title": "Olletho",
-      "projectId": "olletho",
-      "description": "Olletho est une implémentation en cours de développement du jeu de société classique Othello.",
-      "hardSkills": ["React", "JavaScript", "CSS"],
-      "cover": "/1728227078_olletho.webp",
-      "mission": [
-        "En jouant à Othello avec des amis et en découvrant la stratégie derrière le jeu, j'ai décidé de relever le défi de créer ma propre application. Mon objectif est de concevoir une plateforme accessible et engageante qui reflète ma vision du jeu, où les utilisateurs peuvent s'affronter sur un plateau interactif tout en apprenant les règles et en perfectionnant leurs compétences stratégiques. Une fonctionnalité Joueur Contre Bot est prévue pour enrichir l'expérience utilisateur."
-      ],
-      "date": 2025,
-      "skills": [
-        "Développer l'application en utilisant React.js pour créer des composants modulaires et réutilisables.",
-        "Créer un design réactif pour s’assurer que le plateau de jeu s’adapte à différentes tailles d’écran, garantissant ainsi une bonne expérience utilisateur sur mobile et desktop.",
-        "Organiser le code de manière claire et maintenable, en utilisant des hooks pour gérer efficacement l'état du jeu.",
-        "Implémenter la logique du jeu Othello, y compris la gestion des coups, le retournement des pions et la vérification des coups valides.",
-        "Rédiger une documentation claire et détaillée qui explique le fonctionnement de l'application et fournit des instructions sur son utilisation.",
-        "Rédiger des commentaires clairs afin de faciliter la compréhension de la logique du jeu lors de la maintenance."
-      ],
-      "linkGitHub": "https://github.com/MaelleN95/olletho",
-      "linkDeployedSite": "https://olletho.vercel.app/"
-    }
+    } 
   ]
 }
