@@ -149,18 +149,6 @@
       "altLogo": "chapeau de fin d'études"
     }
   ],
-  "socialMedia": [
-    {
-      "logo": "/linkedin-icon.svg",
-      "title": "LinkedIn",
-      "link": "https://www.linkedin.com/in/maelle-nioche"
-    },
-    {
-      "logo": "/github-icon.svg",
-      "title": "Git Hub",
-      "link": "https://github.com/MaelleN95/"
-    }
-  ],
   "projects": [
     {
       "title": "Booki, site d'agence immobilière",

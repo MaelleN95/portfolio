@@ -2,11 +2,28 @@ footer {
   background-color: $red-color;
   padding: 1rem 0;
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   & span {
     font-family: 'Roboto', sans-serif, Arial;
     font-weight: 400;
     font-size: $mobil-font-size;
     text-align: center;
+    padding: 0 2rem;
   }
+
+  & div {
+    display: flex;
+    align-items: center;
+    padding: 0 1.5rem;
+    & a {
+      display: flex;
+      margin: 0 0.5rem;
+    }
+    & img {
+      width: 35px;
+    }
+  }
+
 }
