@@ -19,8 +19,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 4rem ;
-
+  padding: 0 0 4rem 0;
   @media (max-width: $small-tablet) {
     flex-direction: column;
     text-align: center;
@@ -30,20 +29,16 @@
     content: '';
     position: absolute;
     left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    height: 100%;
     width: 30%;
     @media (max-width: $tablet) {
       width: 25%;
-      max-height: 504px;
     }
     @media (max-width: $small-tablet) {
       content: none;
     }
     background-color: $bg-color-dark;
     z-index: -1;
-    height: 900px;
+    height: 2000px;
   }
 
   & .banner-content {
@@ -75,28 +70,18 @@
     position: relative;
     @include img-tablet-size;
     margin: 0 5vw 0 2.5vw;
+  }
+}
 
-    &::before {
-      content: '';
-      position: absolute;
-      left: 27%;
-      top: 27%;
-      @media (max-width: $tablet) {
-        border: 7px solid $bg-color-dark;
-      }
-      @media (max-width: $small-tablet) {
-        content: none;
-        animation: 0;
-      }
-      border-radius: 50%;
-      height: 50%;
-      width: 50%;
-      background-color: $bg-color-light;
-      z-index: -1;
-      max-height: 645.2px;
-      border: 10px solid $bg-color-dark;
-      animation: move-circle 8s ease-in-out infinite;
-    }
+.img-maelle {
+  background-color: $bg-color-dark;
+  background-image: url(../assets/images/my-photo.webp);
+  background-size: cover;
+  border-radius: 50%;
+  @include img-tablet-size;
+  border: 18px solid $bg-color-dark;
+  @media (max-width: $tablet) {
+    border: 14px solid $bg-color-dark;
   }
 }
 
@@ -119,60 +104,5 @@
     margin: 0.2rem 0;
     font-size: 1.2rem;
     line-height: 1.5;
-  }
-}
-
-.img-maelle {
-  background-color: $bg-color-dark;
-  background-image: url(../assets/images/my-photo.webp);
-  background-size: cover;
-  border-radius: 50%;
-  @include img-tablet-size;
-  border: 20px solid $bg-color-dark;
-  @media (max-width: $tablet) {
-    border: 14px solid $bg-color-dark;
-  }
-  @media (max-width: $small-tablet) {
-    animation: 0;
-  }
-  animation: move-img 11s ease-in-out infinite;
-}
-
-@keyframes move-img {
-  0% {
-    transform: scale(1);
-  }
-  15% {
-    transform: scale(1.07);
-  }
-  35% {
-    transform: scale(0.97);
-  }
-  60% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-@keyframes move-circle {
-  0% {
-    transform: scale(1.7);
-  }
-  25% {
-    transform: scale(1.9);
-  }
-  50% {
-    transform: scale(2.2);
-  }
-  63% {
-    transform: scale(2.15);
-  }
-  75% {
-    transform: scale(2.25);
-  }
-  100% {
-    transform: scale(1.7);
   }
 }
